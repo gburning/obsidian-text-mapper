@@ -38,8 +38,8 @@ export default class TextMapperPlugin extends Plugin {
         ctx: MarkdownPostProcessorContext
     ): Promise<any> {
         try {
-            const tiles = [await hpsCartography.getDefinitions()];
-            ctx.addChild(new TextMapper(el, ctx.docId, source, tiles));
+            const tileSets = [await hpsCartography.getDefinitions()];
+            ctx.addChild(new TextMapper(el, ctx.docId, source, tileSets));
         } catch (e) {
             console.log("text mapper error", e);
             ctx.addChild(new ParseError(el));
@@ -56,14 +56,12 @@ export class TextMapper extends MarkdownRenderChild {
         containerEl: HTMLElement,
         docId: string,
         source: string,
-        tiles: string[]
+        tileSets: string[][]
     ) {
         super(containerEl);
         this.textMapperEl = this.containerEl.createDiv({ cls: "textmapper" });
 
-        const totalSource = source
-            .split("\n")
-            .concat(...tiles.map((tile) => tile.split("\n")));
+        const totalSource = source.split("\n").concat(...tileSets);
 
         const parser = new TextMapperParser(docId);
         parser.process(totalSource);
