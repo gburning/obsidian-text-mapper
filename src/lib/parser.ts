@@ -248,7 +248,11 @@ export class TextMapperParser {
      * The key would be "NAME".
      */
     parseOption(optionStr: string): any {
-        const option: any = {
+        const option: {
+            valid: boolean;
+            key: string;
+            value: string | boolean;
+        } = {
             valid: false,
             key: "",
             value: "",
