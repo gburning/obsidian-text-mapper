@@ -37,7 +37,7 @@ const options = {
         ".ttf": "file",
         ".woff": "file",
     },
-    target: "esnext",
+    target: "es2018",
     logLevel: "info",
     sourcemap: isProduction ? false : "inline",
     treeShaking: true,
