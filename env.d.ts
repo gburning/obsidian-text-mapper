@@ -1,4 +1,5 @@
-// Support file types that use the ["copy" loader](https://esbuild.github.io/content-types/#copy)
+// Support for various [esbuild loaders](https://esbuild.github.io/content-types)
+
 declare module "*.css" {}
 
 // fonts
@@ -10,8 +11,6 @@ declare module "*.ttf" {
     const src: string;
     export default src;
 }
-
-// Support file types that use the ["dataurl" loader](https://esbuild.github.io/content-types/#data-url)
 
 // images
 declare module "*.png" {
