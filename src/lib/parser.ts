@@ -421,6 +421,7 @@ export class TextMapperParser {
                 coordsEl,
                 this.orientation,
                 this.textAttributes,
+                this.glowAttributes,
                 this.options["coordinates-format"]
             );
         }
