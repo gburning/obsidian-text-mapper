@@ -61,12 +61,14 @@ export class Region {
             },
         });
 
-        const xStr = this.x.toString().padStart(2, "0");
-        const yStr = this.y.toString().padStart(2, "0");
+        const xStr = this.x.toString();
+        const yStr = this.y.toString();
 
         const content = coordinatesFormat
-            .replace("{X}", xStr)
-            .replace("{Y}", yStr);
+            .replace("{X}", xStr.padStart(2, "0"))
+            .replace("{x}", xStr)
+            .replace("{Y}", yStr.padStart(2, "0"))
+            .replace("{y}", yStr);
 
         coordEl.textContent = content;
     }
