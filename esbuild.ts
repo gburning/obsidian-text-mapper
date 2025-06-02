@@ -54,9 +54,6 @@ async function toggleHotreload(outdir: string) {
     // Set up auto reloading for development
     const filePath = await resolve(outdir, ".hotreload");
 
-    // Copy static files to the output directory
-    await cp("./static", outdir, { recursive: true });
-
     if (isProduction) {
         return rm(filePath, { force: true });
     } else {
@@ -65,6 +62,8 @@ async function toggleHotreload(outdir: string) {
 }
 
 try {
+    // Copy static files to the output directory
+    await cp("./static", outdir, { recursive: true });
     await toggleHotreload(outdir);
 
     if (isProduction) {
