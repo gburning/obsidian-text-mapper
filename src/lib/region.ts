@@ -1,6 +1,6 @@
-import { SVGElement } from "./constants";
-import { Point, Orientation } from "./orientation";
-import { NamespaceFunction } from "./constants";
+import { SVGElement } from "./constants.ts";
+import { Point, Orientation } from "./orientation.ts";
+import { NamespaceFunction } from "./constants.ts";
 
 export class Region {
     x: number;
@@ -53,6 +53,8 @@ export class Region {
         const coordEl = svgEl.createSvg("text", {
             attr: {
                 ...textAttributes,
+                "font-size": "24pt",
+                "font-style": "normal",
                 "text-anchor": "middle",
                 x: pix.x.toFixed(1),
                 y: pix.y.toFixed(1),

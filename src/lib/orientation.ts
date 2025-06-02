@@ -1,4 +1,4 @@
-import { Region } from "./region";
+import { Region } from "./region.ts";
 
 export class Point {
     x: number;

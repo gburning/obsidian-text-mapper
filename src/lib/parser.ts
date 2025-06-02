@@ -18,10 +18,10 @@ import {
     SVG_CHOMP_WHITESPACE_REGEX,
     SVG_ID_REGEX,
     SVG_HREF_REGEX,
-} from "./constants";
-import { Point, Orientation } from "./orientation";
-import { Region } from "./region";
-import { Spline } from "./spline";
+} from "./constants.ts";
+import { Point, Orientation } from "./orientation.ts";
+import { Region } from "./region.ts";
+import { Spline } from "./spline.ts";
 
 // https://alexschroeder.ch/cgit/text-mapper/tree/lib/Game/TextMapper/Mapper.pm
 export class TextMapperParser {

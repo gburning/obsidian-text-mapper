@@ -4,7 +4,10 @@ This plugin renders hex maps in Obsidian. It is a Typescript port of [Text Mappe
 
 <img width="698" alt="example" src="https://user-images.githubusercontent.com/179336/234148935-af9a25f5-7891-4923-a467-b68b19c2ccb7.png">
 
-The original Text Mapper by Alex Schroeder is licensed under the [GNU Affero General Public License, Version 3](https://www.gnu.org/licenses/agpl-3.0.txt). The Gnomeyland icons by Gregory B. MacKenzie are licensed und the [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+## Attributions
+
+-   Based on [Obsidian Text Mapper](https://github.com/modality/obsidian-text-mapper) by Michael Hansen under the [MIT license](https://mit-license.org/) and the original Text Mapper by Alex Schroeder, which is licensed under the [GNU Affero General Public License, Version 3](https://www.gnu.org/licenses/agpl-3.0.txt).
+-   Map tiles provided by [Highland Paranormal Society](https://www.hps.quest/) under commercial license. See [license details](src/themes/hps-cartography/LICENSE.md).
 
 ### Notes and changes
 
