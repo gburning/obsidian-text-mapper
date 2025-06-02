@@ -1,7 +1,12 @@
 import "./styles.css";
 import fontUglyQua from "./assets/UglyQua-webfont.woff";
 import fontUglyQuaItalic from "./assets/UglyQua-Italic-webfont.woff";
-import tiles from "./assets/*.png";
+import imageAssets from "./assets/**/*.png";
+
+const { tiles, icons } = imageAssets as unknown as Record<
+    string,
+    Record<string, string>
+>;
 
 export async function getDefinitions() {
     const res: string[] = [
@@ -22,6 +27,14 @@ export async function getDefinitions() {
         `river path attributes transform="translate(20,10)" stroke="#6ebae7" stroke-width="8" fill="none" opacity="0.7"`,
         `canyon path attributes transform="translate(20,10)" stroke="black" stroke-width="24" fill="none" opacity="0.2"`,
     ];
+
+    Object.entries(icons).forEach(([key, value]) => {
+        // Remove the file extension from the key
+        const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
+        res.push(
+            `<image id="${_key}" href="${value}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
+        );
+    });
 
     Object.entries(tiles).forEach(([key, value]) => {
         // Remove the file extension from the key
