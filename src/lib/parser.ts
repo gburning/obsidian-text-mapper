@@ -23,11 +23,18 @@ import { Point, Orientation } from "./orientation.ts";
 import { Region } from "./region.ts";
 import { Spline } from "./spline.ts";
 
+interface TextMapperParserOptions {
+    horizontal?: boolean;
+    "coordinates-format"?: string;
+    "swap-even-odd"?: boolean;
+    global?: boolean;
+}
+
 // https://alexschroeder.ch/cgit/text-mapper/tree/lib/Game/TextMapper/Mapper.pm
 export class TextMapperParser {
     id: string;
     pathId: number;
-    options: any;
+    options: TextMapperParserOptions;
     regions: Region[]; // ' => sub { [] };
     attributes: any; // ' => sub { {} };
     defs: string[]; // ' => sub { [] };
