@@ -1,0 +1,12 @@
+Rewrite:
+  ☐ Make all defaults overridable
+  ☐ Clean up unused/confusing types/elements supported in parser
+    ☐ Glow?
+    ☐ Splines?
+    ☐ Backgrounds vs Things?
+  ☐ Rename: tiles -> themes
+  ☐ Update README
+  ☐ Add way of setting themes/tile sets from Obsidian via txt file or similar
+  ☐ Update docs for coordinates-format
+  ☐ Publish to Obsidian plugin store
+π
