@@ -19,12 +19,16 @@ export const SVG_ID_REGEX = /(id=")(\S+)(")/g;
 // TODO: Should it be this instead?
 // export const SVG_HREF_REGEX = /((xlink:)?href="#)(\S+)(")/g;
 export const SVG_HREF_REGEX = /(xlink:href="#)(\S+)(")/g;
+export const CSS_URL_FUNC_REGEX = /(url\(['"]?#)([^\r\n\f\v]+)(['"]?\))/g;
 
 export interface SVGElement {
     createSvg(tag: string, options?: any): SVGElement;
     innerHTML: string;
     textContent: string;
-    insertAdjacentHTML(position: "beforebegin" | "afterbegin" | "beforeend" | "afterend", text: string) : void;
+    insertAdjacentHTML(
+        position: "beforebegin" | "afterbegin" | "beforeend" | "afterend",
+        text: string
+    ): void;
 }
 
 export type NamespaceFunction = {

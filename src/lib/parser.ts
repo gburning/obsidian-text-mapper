@@ -18,6 +18,7 @@ import {
     SVG_CHOMP_WHITESPACE_REGEX,
     SVG_ID_REGEX,
     SVG_HREF_REGEX,
+    CSS_URL_FUNC_REGEX,
 } from "./constants.ts";
 import { Point, Orientation } from "./orientation.ts";
 import { Region } from "./region.ts";
@@ -233,7 +234,19 @@ export class TextMapperParser {
         const output: any = {};
         let matches;
         while ((matches = ATTRIBUTE_MAP_REGEX.exec(attrs))) {
-            output[matches[1]] = matches[2];
+            let [_, key, value] = matches;
+            // Namespace url(#foo) values
+            let urlFuncMatches;
+            while ((urlFuncMatches = CSS_URL_FUNC_REGEX.exec(value))) {
+                value = value.replace(
+                    urlFuncMatches[0],
+                    `${urlFuncMatches[1]}${this.namespace(urlFuncMatches[2])}${
+                        urlFuncMatches[3]
+                    }`
+                );
+            }
+            // const value.
+            output[key] = value;
         }
         return output;
     }
