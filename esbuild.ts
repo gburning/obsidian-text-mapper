@@ -42,6 +42,11 @@ const options = {
     sourcemap: isProduction ? false : "inline",
     treeShaking: true,
     outdir,
+    plugins: [
+        globImport({
+            camelCase: false,
+        }),
+    ],
 } satisfies esbuild.BuildOptions;
 
 async function enableHotReload(outdir: string) {
