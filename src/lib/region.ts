@@ -42,6 +42,7 @@ export class Region {
         svgEl: SVGElement,
         orientation: Orientation,
         textAttributes: any,
+        glowAttributes: any,
         coordinatesFormat: string
     ): void {
         const pix = orientation.pixels(
@@ -50,14 +51,24 @@ export class Region {
             -orientation.dy * orientation.labelOffset
         );
 
-        const coordEl = svgEl.createSvg("text", {
+        const gEl = svgEl.createSvg("g");
+
+        const glowEl = gEl.createSvg("text", {
             attr: {
-                ...textAttributes,
-                "font-size": "24pt",
-                "font-style": "normal",
                 "text-anchor": "middle",
                 x: pix.x.toFixed(1),
                 y: pix.y.toFixed(1),
+                ...textAttributes,
+                ...glowAttributes,
+            },
+        });
+
+        const coordEl = gEl.createSvg("text", {
+            attr: {
+                "text-anchor": "middle",
+                x: pix.x.toFixed(1),
+                y: pix.y.toFixed(1),
+                ...textAttributes,
             },
         });
 
@@ -71,6 +82,7 @@ export class Region {
             .replace("{y}", yStr);
 
         coordEl.textContent = content;
+        glowEl.textContent = content;
     }
 
     svgRegion(
