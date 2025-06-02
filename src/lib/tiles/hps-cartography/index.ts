@@ -18,7 +18,7 @@ export async function getDefinitions() {
     const res: string[] = [
         // Options
         "option horizontal",
-        "option coordinates-format {y}.{x}",
+        "option coordinates-format {x}.{y}",
         // Defaults
         `default attributes fill="none" stroke="none"`,
         `glow stroke="white" stroke-width="5pt" stroke-linejoin="round"`,
