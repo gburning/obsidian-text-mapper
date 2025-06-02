@@ -28,6 +28,7 @@ const options = {
     external: ["obsidian", "electron", ...builtins],
     format: "cjs",
     assetNames: "[name]",
+    // TODO: Add support for resolving images, etc. as file urls with Obsidian syntax
     loader: {
         ".jpeg": "dataurl",
         ".jpg": "dataurl",

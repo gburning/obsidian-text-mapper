@@ -16,6 +16,8 @@ export const SPLINE_POINT_REGEX = /(-?\d\d)(-?\d\d)/;
 export const ATTRIBUTE_MAP_REGEX = /(\S+)="([^"]+)"/g;
 export const SVG_CHOMP_WHITESPACE_REGEX = /(>)(\s+)(<)/g;
 export const SVG_ID_REGEX = /(id=")(\S+)(")/g;
+// TODO: Should it be this instead?
+// export const SVG_HREF_REGEX = /((xlink:)?href="#)(\S+)(")/g;
 export const SVG_HREF_REGEX = /(xlink:href="#)(\S+)(")/g;
 
 export interface SVGElement {

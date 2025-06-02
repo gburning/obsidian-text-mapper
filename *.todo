@@ -3,6 +3,7 @@ Rewrite:
   ☐ Clean up unused/confusing types/elements supported in parser
     ☐ Glow?
     ☐ Splines?
+      - Det är "implementationen" av en "path"
     ☐ Backgrounds vs Things?
   ☐ Rename: tiles -> themes
   ☐ Update README
