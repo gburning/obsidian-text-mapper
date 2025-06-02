@@ -50,7 +50,7 @@ const options = {
     ],
 } satisfies esbuild.BuildOptions;
 
-async function enableHotReload(outdir: string) {
+async function toggleHotreload(outdir: string) {
     // Set up auto reloading for development
     const filePath = await resolve(outdir, ".hotreload");
 
@@ -65,10 +65,11 @@ async function enableHotReload(outdir: string) {
 }
 
 try {
+    await toggleHotreload(outdir);
+
     if (isProduction) {
         await esbuild.build(options);
     } else {
-        await enableHotReload(outdir);
         const ctx = await esbuild.context(options);
         await ctx.watch();
     }
