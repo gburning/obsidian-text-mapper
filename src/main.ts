@@ -9,7 +9,6 @@ import { ParseError } from "./lib/error.ts";
 import { TextMapperParser } from "./lib/parser.ts";
 
 import "./assets/styles.css";
-import "./assets/manifest.json";
 
 import * as hpsCartography from "./lib/tiles/hps-cartography/index.ts";
 
