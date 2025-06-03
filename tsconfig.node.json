@@ -12,6 +12,6 @@
         "lib": ["ESNext", "ES5", "ES6", "ES7"],
         "allowSyntheticDefaultImports": true
     },
-    "include": ["**/*.ts"],
+    "include": ["esbuild.ts"],
     "exclude": ["src"]
 }
