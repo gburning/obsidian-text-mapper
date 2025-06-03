@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import { cp, rm, writeFile } from "fs/promises";
+import { cp, rm, mkdir, writeFile } from "fs/promises";
 import { resolve } from "path";
 import { homedir } from "os";
 import globImport from "esbuild-plugin-glob-import";
@@ -19,6 +19,16 @@ const outdir = resolve(
     homedir(),
     "Documents/_privat/Gabriel/.obsidian/plugins/text-mapper/"
 );
+
+function cleanOutdir(outdir: string): esbuild.Plugin {
+    return {
+        name: "clean-outdir",
+        setup: async () => {
+            // Clean the output directory before building
+            await rm(outdir, { recursive: true, force: true });
+        },
+    };
+}
 
 function copyStaticFiles(config: {
     inputdir: string;
@@ -53,8 +63,9 @@ function toggleObsidianHotreload(outdir: string): esbuild.Plugin {
             const filePath = resolve(outdir, ".hotreload");
 
             if (isProduction) {
-                return rm(filePath, { force: true });
+                return rm(filePath, { force: true, recursive: true });
             } else {
+                await mkdir(outdir, { recursive: true });
                 return writeFile(filePath, "");
             }
         },
@@ -86,6 +97,7 @@ const options = {
     treeShaking: true,
     outdir,
     plugins: [
+        cleanOutdir(outdir),
         toggleObsidianHotreload(outdir),
         buildObsidianManifest(outdir),
         copyStaticFiles({ inputdir: "./static", outdir }),
