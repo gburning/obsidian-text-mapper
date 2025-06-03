@@ -26,8 +26,8 @@ export async function getDefinitions() {
         `<style>@font-face {font-family: "UglyQua"; src: url('${fontUglyQua}') format('woff');}</style>`,
         `<style>@font-face {font-style: italic; font-family: "UglyQua"; src: url('${fontUglyQuaItalic}') format('woff');}</style>`,
         // Text styles
-        `text font-size="20pt" dy="5px" font-family="UglyQua" font-style="normal"`,
-        `label font-size="32pt" dy="15px" font-family="UglyQua" font-style="italic"`,
+        `text font-size="16pt" dy="5px" font-family="UglyQua" font-style="normal"`,
+        `label font-size="24pt" dy="15px" font-family="UglyQua" font-style="italic"`,
         // Paths
         `trail path attributes stroke="#e3bea3" stroke-width="6" fill="none"`,
         `river path attributes transform="translate(20,10)" stroke="#6ebae7" stroke-width="8" fill="none" opacity="0.7"`,
