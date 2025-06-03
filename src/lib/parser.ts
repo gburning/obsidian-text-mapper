@@ -25,10 +25,44 @@ import { Region } from "./region.ts";
 import { Spline } from "./spline.ts";
 
 interface TextMapperParserOptions {
-    horizontal?: boolean;
-    "coordinates-format"?: string;
-    "swap-even-odd"?: boolean;
-    global?: boolean;
+    /**
+     * Set to true to use "pointy top" hexes rather than "flat top" hexes.
+     * @default false // (flat top hexes).
+     * @todo Rename option
+     */
+    horizontal: boolean;
+    /**
+     * Format to use for coordinates text elements.
+     * Supports the following replacement variables (replaced with actual coordinates):
+     *
+     * @param \{X} - X coordinate with leading zeroes
+     * @param \{Y} - Y coordinate with leading zeroes
+     * @param \{x} - X coordinate without leading zeroes
+     * @param \{y} - Y coordinate without leading zeroes
+     *
+     * @example "{x}.{y}" yields "1.1", "1.2", etc.
+     * @example "{X}{Y}" yields "0101", "0102", etc.
+     * @default "{X}{Y}"
+     */
+    "coordinates-format": string;
+    /**
+     * Swap even/odd column alignment:
+     * - When false, odd columns are to the southeast and even columns to the northeast (with flat top hexes)
+     * - When true, odd columns are to the northeast and even columns to the southeast (with flat top hexes)
+     * @default false
+     * @todo Rename option
+     */
+    "swap-even-odd": boolean;
+    /**
+     * Define a background fill for the canvas at large.
+     * @default undefined // (no background)
+     */
+    background?: string;
+    /**
+     * Controls wether or not fragments (element IDs) are namespaced with the document ID.
+     * @default false // (elements are namespaced)
+     */
+    global: boolean;
 }
 
 // https://alexschroeder.ch/cgit/text-mapper/tree/lib/Game/TextMapper/Mapper.pm
@@ -260,7 +294,7 @@ export class TextMapperParser {
      * The parameters will be parsed into a string[]: ["NAME", "X", "Y", "Z"]
      * The key would be "NAME".
      */
-    parseOption(optionStr: string): any {
+    parseOption(optionStr: string): void {
         const option: {
             valid: boolean;
             key: string;
@@ -271,29 +305,35 @@ export class TextMapperParser {
             value: "",
         };
 
-        // Tokenize the option and set the key
+        // Tokenize the option string. Return early if empty.
         const tokens = optionStr.split(" ");
         if (tokens.length < 1) {
-            return option;
+            return;
         }
-        option.key = tokens[0];
 
-        // Validate the option
-        if (option.key === "horizontal" || option.key === "swap-even-odd") {
-            option.valid = true;
-            option.value = true;
-        } else if (option.key === "coordinates-format") {
-            option.valid = true;
-            option.value = tokens.slice(1).join(" ");
-        } else if (option.key === "global") {
-            option.valid = true;
-            option.value = true;
-        }
+        let [key, value] = [tokens[0], tokens.slice(1).join(" ")];
+        option.key = tokens[0];
 
         // If the option is valid, then set it in this.options. It can now be
         // used throughout the rendering code.
-        if (option.valid) {
-            this.options[option.key] = option.value;
+        switch (key) {
+            // boolean options
+            case "global":
+            case "horizontal":
+            case "swap-even-odd":
+                this.options[key] = true;
+                break;
+
+            // string options
+            case "coordinates-format":
+            case "background":
+                this.options[key] = value;
+                break;
+
+            default:
+                // TODO: Enable depending on debug level
+                // console.warning(`Unexpected option string: "${optionStr}"`)
+                break;
         }
     }
 
@@ -311,9 +351,8 @@ export class TextMapperParser {
         // return `<polygon ${attributes} points="${points}" />`;
     }
 
-    svgHeader(el: HTMLElement): SVGElement {
+    svgHeader(el: HTMLElement, backgroundFill?: string): SVGElement {
         if (this.regions.length == 0) {
-            // @ts-ignore
             return el.createSvg("svg");
         }
 
@@ -321,7 +360,6 @@ export class TextMapperParser {
         const width = (vx2 - vx1).toFixed(0);
         const height = (vy2 - vy1).toFixed(0);
 
-        // @ts-ignore
         const svgEl: SVGElement = el.createSvg("svg", {
             attr: {
                 "xmlns:xlink": "http://www.w3.org/1999/xlink",
@@ -329,15 +367,17 @@ export class TextMapperParser {
             },
         });
 
-        svgEl.createSvg("rect", {
-            attr: {
-                x: vx1,
-                y: vy1,
-                width: width,
-                height: height,
-                fill: "white",
-            },
-        });
+        if (backgroundFill) {
+            svgEl.createSvg("rect", {
+                attr: {
+                    x: vx1,
+                    y: vy1,
+                    width: width,
+                    height: height,
+                    fill: backgroundFill,
+                },
+            });
+        }
 
         return svgEl;
     }
@@ -487,7 +527,7 @@ export class TextMapperParser {
     }
 
     svg(el: HTMLElement) {
-        const svgEl = this.svgHeader(el);
+        const svgEl = this.svgHeader(el, this.options.background);
         this.svgDefs(svgEl);
         this.svgBackgrounds(svgEl);
         this.svgPaths(svgEl);
