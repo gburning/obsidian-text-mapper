@@ -1,26 +1,22 @@
 import type { Theme } from "../../lib/theme";
-import { getAssetUri } from "../../lib/util";
-
-import _imageAssets from "./assets/**/*.png";
-const imageAssets = _imageAssets as unknown as { default: string }[];
+import { getAssetUri, getElementIdFromPath } from "../../lib/util";
+import { modules as assets } from "./assets/**/*.png#default";
 
 export const hpsXark: Theme = {
     displayName: "The Tiles of Xark!",
     id: "hps-xark",
     getDefinitions() {
         const res: string[] = [
-            // Options
             "option coordinates-format {x}.{y}",
-            // Defaults
             `default attributes fill="none" stroke="none"`,
         ];
 
-        imageAssets.forEach((asset) => {
-            // Remove the file extension from the key
-            const _key = asset.name.replace(/\.(png|jpg|jpeg|svg)$/, "");
+        assets.forEach(({ default: path }) => {
             res.push(
-                `<image id="hps-x-${_key}" href="${getAssetUri(
-                    asset.content
+                `<image id="hps-x-${getElementIdFromPath(
+                    path
+                )}" href="${getAssetUri(
+                    path
                 )}" height="225" width="225" y="-112.5" x="-112.5" />`
             );
         });

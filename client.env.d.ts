@@ -29,3 +29,19 @@ declare module "*.svg" {
     const src: string;
     export default src;
 }
+
+// types for glob imports using esbuild-plugin-import-pattern
+
+type GlobImportResults<T> = {
+    paths: string[];
+    modules: T[];
+    entries: [path: string, content: T][];
+};
+
+declare module "*.png#default" {
+    type T = GlobImportResults<{ default: string }>;
+
+    export const entries: T["entries"];
+    export const modules: T["modules"];
+    export const paths: T["paths"];
+}
