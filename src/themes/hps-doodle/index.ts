@@ -3,8 +3,8 @@ import { getAssetUri, getElementIdFromPath } from "../../lib/util";
 import { modules as assets } from "./assets/**/*.png#default";
 
 export const hpsDoodle: Theme = {
-    displayName: "The Tiles of Xark!",
-    id: "hps-xark",
+    displayName: "HPS Doodle Tiles",
+    id: "hps-doodle",
     getDefinitions() {
         const res: string[] = [
             // Options
