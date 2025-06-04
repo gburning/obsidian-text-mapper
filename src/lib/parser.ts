@@ -86,6 +86,7 @@ export class TextMapperParser {
 
     constructor(id: string, themes: Theme[] = []) {
         this.id = id;
+        this.themes = themes;
         this.options = {
             orientation: "flat-top",
             "coordinates-format": "{X}{Y}",
