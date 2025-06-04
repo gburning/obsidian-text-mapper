@@ -8,11 +8,10 @@ const { tiles, icons } = imageAssets as unknown as Record<
 >;
 
 // TODO: Document the widths/heights used (they seem to be required for some reason)
-export const hpsCartography: Theme = {
+export const hpsXark: Theme = {
     getDefinitions() {
         const res: string[] = [
             // Options
-            "option hex-type pointy-top",
             "option coordinates-format {x}.{y}",
             // Defaults
             `default attributes fill="none" stroke="none"`,
@@ -22,25 +21,25 @@ export const hpsCartography: Theme = {
             `canyon path attributes transform="translate(20,10)" stroke="black" stroke-width="24" fill="none" opacity="0.2"`,
         ];
 
-        Object.entries(icons).forEach(([key, value]) => {
-            // Remove the file extension from the key
-            const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
-            res.push(
-                `<image id="${_key}" href="${getAssetUri(
-                    value
-                )}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
-            );
-        });
+        // Object.entries(icons).forEach(([key, value]) => {
+        //     // Remove the file extension from the key
+        //     const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
+        //     res.push(
+        //         `<image id="${_key}" href="${getAssetUri(
+        //             value
+        //         )}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
+        //     );
+        // });
 
-        Object.entries(tiles).forEach(([key, value]) => {
-            // Remove the file extension from the key
-            const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
-            res.push(
-                `<image id="${_key}" href="${getAssetUri(
-                    value
-                )}" height="225" width="225" y="-112.5" x="-112.5" />`
-            );
-        });
+        // Object.entries(tiles).forEach(([key, value]) => {
+        //     // Remove the file extension from the key
+        //     const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
+        //     res.push(
+        //         `<image id="${_key}" href="${getAssetUri(
+        //             value
+        //         )}" height="225" width="225" y="-112.5" x="-112.5" />`
+        //     );
+        // });
 
         return res;
     },

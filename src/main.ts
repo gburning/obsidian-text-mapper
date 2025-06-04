@@ -1,3 +1,5 @@
+import "./assets/styles.css";
+
 import {
     MarkdownPostProcessorContext,
     MarkdownRenderChild,
@@ -6,11 +8,13 @@ import {
 
 import { ParseError } from "./lib/error";
 import { TextMapperParser } from "./lib/parser";
-
-import "./assets/styles.css";
-
-import * as hpsCartography from "./themes/hps-cartography";
+import type { Theme } from "./lib/theme";
 import { providePluginContext } from "./lib/context";
+
+import { fontUglyQua } from "./themes/font-uqly-qua";
+import { hpsCartography } from "./themes/hps-cartography";
+import { hpsDoodle } from "./themes/hps-doodle";
+import { hpsXark } from "./themes/hps-xark";
 
 export default class TextMapperPlugin extends Plugin {
     async onload() {
@@ -29,8 +33,8 @@ export default class TextMapperPlugin extends Plugin {
         ctx: MarkdownPostProcessorContext
     ): Promise<any> {
         try {
-            const tileSets = [await hpsCartography.getDefinitions()];
-            ctx.addChild(new TextMapper(el, ctx.docId, source, tileSets));
+            const themes = [fontUglyQua, hpsCartography, hpsDoodle, hpsXark];
+            ctx.addChild(new TextMapper(el, ctx.docId, source, themes));
         } catch (e) {
             console.log("text mapper error", e);
             ctx.addChild(new ParseError(el));
@@ -47,15 +51,13 @@ export class TextMapper extends MarkdownRenderChild {
         containerEl: HTMLElement,
         docId: string,
         source: string,
-        tileSets: string[][]
+        themes: Theme[]
     ) {
         super(containerEl);
         this.textMapperEl = this.containerEl.createDiv({ cls: "textmapper" });
 
-        const totalSource = source.split("\n").concat(...tileSets);
-
-        const parser = new TextMapperParser(docId);
-        parser.process(totalSource);
+        const parser = new TextMapperParser(docId, themes);
+        parser.process(source);
         parser.svg(this.textMapperEl);
     }
 }

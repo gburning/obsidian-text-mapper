@@ -1,3 +1,4 @@
+import type { Theme } from "src/lib/theme";
 import {
     ATTRIBUTES_REGEX,
     PATH_ATTRIBUTES_REGEX,
@@ -67,6 +68,7 @@ interface TextMapperParserOptions {
 // https://alexschroeder.ch/cgit/text-mapper/tree/lib/Game/TextMapper/Mapper.pm
 export class TextMapperParser {
     id: string;
+    themes: Theme[];
     pathId: number;
     options: TextMapperParserOptions;
     regions: Region[]; // ' => sub { [] };
@@ -82,7 +84,7 @@ export class TextMapperParser {
     orientation: Orientation;
     // messages: string[]; // ' => sub { [] };
 
-    constructor(id: string) {
+    constructor(id: string, themes: Theme[] = []) {
         this.id = id;
         this.options = {
             orientation: "flat-top",
@@ -119,8 +121,14 @@ export class TextMapperParser {
     /**
      * Process the source code of a map, line by line.
      */
-    process(lines: string[]) {
+    process(source: string) {
         this.pathId = 0;
+
+        const lines: string[] = [];
+
+        this.themes.forEach((theme) => lines.concat(theme.getDefinitions()));
+
+        lines.concat(source.split("\n"));
 
         // First, set all options.
         for (const line of lines) {
