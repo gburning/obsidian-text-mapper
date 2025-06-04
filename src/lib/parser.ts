@@ -127,9 +127,19 @@ export class TextMapperParser {
 
         const lines: string[] = [];
 
-        this.themes.forEach((theme) => lines.concat(theme.getDefinitions()));
+        this.themes.forEach((theme) => {
+            try {
+                lines.push(...theme.getDefinitions());
+            } catch (e) {
+                console.error(
+                    `Error processing theme "${theme.id}":`,
+                    e instanceof Error ? e.message : e
+                );
+                throw e;
+            }
+        });
 
-        lines.concat(source.split("\n"));
+        lines.push(...source.split("\n"));
 
         // First, set all options.
         for (const line of lines) {
