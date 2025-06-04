@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "types": [],
+        "strict": true,
+        "baseUrl": ".",
+        "composite": true,
+        "module": "es2022",
+        "target": "es2022",
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "importHelpers": true,
+        "moduleResolution": "bundler",
+        "noEmit": true
+    },
+    "include": ["client.env.d.ts", "src/**/*"]
+}

@@ -1,4 +1,4 @@
-import { Region } from "./region.ts";
+import { Region } from "./region";
 
 /**
  * Represents a 2D point with x and y coordinates
@@ -23,11 +23,11 @@ export class Point {
 
 /**
  * Handles hex grid orientation and coordinate conversion between hex coordinates and SVG pixel coordinates
- * 
+ *
  * Supports both flat-top and pointy-top hex orientations:
  * - Flat-top: Hexagons have flat sides at top/bottom
  * - Pointy-top: Hexagons have points at top/bottom
- * 
+ *
  * @todo Replace magic numbers with named constants (HEX_SIZE = 100, MARGIN = 60)
  * @todo Add unit tests to verify coordinate conversion accuracy
  */
@@ -55,7 +55,7 @@ export class Orientation {
     /**
      * Calculates the SVG viewbox dimensions based on the hex regions
      * to ensure all hexes are visible with proper margins
-     * 
+     *
      * @todo Use Number.POSITIVE_INFINITY and Number.NEGATIVE_INFINITY instead of undefined
      */
     viewbox(regions: Region[]): number[] {
@@ -95,7 +95,7 @@ export class Orientation {
 
     /**
      * Returns the points for the six corners of a hexagon
-     * in clockwise order starting from the leftmost (flat-top) 
+     * in clockwise order starting from the leftmost (flat-top)
      * or topmost (pointy-top) corner
      */
     hexCorners(): Point[] {
@@ -122,12 +122,12 @@ export class Orientation {
 
     /**
      * Converts hex grid coordinates to SVG pixel coordinates
-     * 
+     *
      * @param pt The hex grid coordinates (x,y)
      * @param offsetX Optional x offset in pixels
      * @param offsetY Optional y offset in pixels
      * @returns SVG pixel coordinates
-     * 
+     *
      * @todo Break down the complex calculation into helper methods
      * @todo Add explanatory diagram in comments
      */

@@ -1,5 +1,5 @@
-import { SVGElement } from "./constants.ts";
-import { Point, Orientation } from "./orientation.ts";
+import { SVGElement } from "./constants";
+import { Point, Orientation } from "./orientation";
 
 export class Spline {
     types: string;

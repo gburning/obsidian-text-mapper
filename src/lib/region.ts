@@ -1,6 +1,6 @@
-import { SVGElement } from "./constants.ts";
-import { Point, Orientation } from "./orientation.ts";
-import { NamespaceFunction } from "./constants.ts";
+import { SVGElement } from "./constants";
+import { Point, Orientation } from "./orientation";
+import { NamespaceFunction } from "./constants";
 
 export class Region {
     x: number;

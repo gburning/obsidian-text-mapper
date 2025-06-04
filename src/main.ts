@@ -3,25 +3,13 @@ import {
     MarkdownRenderChild,
     Plugin,
 } from "obsidian";
-import { join } from "path";
 
-import { ParseError } from "./lib/error.ts";
-import { TextMapperParser } from "./lib/parser.ts";
+import { ParseError } from "./lib/error";
+import { TextMapperParser } from "./lib/parser";
 
 import "./assets/styles.css";
 
 import * as hpsCartography from "./lib/tiles/hps-cartography/index.ts";
-
-export function resolvePluginAsset(plugin: Plugin, assetPath: string) {
-    return plugin.app.vault.adapter.getResourcePath(
-        join(
-            plugin.app.vault.configDir,
-            "plugins",
-            plugin.manifest.id,
-            assetPath
-        )
-    );
-}
 
 export default class TextMapperPlugin extends Plugin {
     async onload() {
