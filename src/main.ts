@@ -9,7 +9,7 @@ import { TextMapperParser } from "./lib/parser";
 
 import "./assets/styles.css";
 
-import * as hpsCartography from "./lib/tiles/hps-cartography/index.ts";
+import * as hpsCartography from "./themes/hps-cartography";
 
 export default class TextMapperPlugin extends Plugin {
     async onload() {
