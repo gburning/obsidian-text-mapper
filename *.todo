@@ -11,8 +11,14 @@ Rewrite:
     ☐ Available rules (parameters/options/definitions)
   ☐ Add support for custom themes via txt file or Obsidian settings
   ☐ Update docs for coordinates-format
-  ☐ Publish to Obsidian plugin store
   ☐ Option to define regions/zones that cover a set of coordinates
   ☐ Easier way of positioning custom text elements
   ☐ Use react/preact
     See: DataView for example
+  
+Publish:
+  ☐ Ensure assets/code used can legally be included
+    ☐ Tiles (check with creator)
+    ☐ Fonts (check with creator)
+    ☐ Code (check with creator)
+  ☐ Publish to Obsidian plugin store
