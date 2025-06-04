@@ -2,6 +2,8 @@ import "./styles.css";
 import type { Theme } from "src/lib/theme";
 
 export const fontUglyQua: Theme = {
+    displayName: "Font - Ugly Qua",
+    id: "font-uqly-qua",
     getDefinitions() {
         return [
             `glow stroke="white" stroke-width="5pt" stroke-linejoin="round"`,

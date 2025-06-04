@@ -9,6 +9,8 @@ const { tiles, icons } = imageAssets as unknown as Record<
 
 // TODO: Document the widths/heights used (they seem to be required for some reason)
 export const hpsDoodle: Theme = {
+    displayName: "HPS Doodle Tiles",
+    id: "hps-doodle",
     getDefinitions() {
         const res: string[] = [
             // Options

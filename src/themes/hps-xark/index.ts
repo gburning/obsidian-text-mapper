@@ -9,6 +9,8 @@ const { tiles, icons } = imageAssets as unknown as Record<
 
 // TODO: Document the widths/heights used (they seem to be required for some reason)
 export const hpsXark: Theme = {
+    displayName: "The Tiles of Xark!",
+    id: "hps-xark",
     getDefinitions() {
         const res: string[] = [
             // Options

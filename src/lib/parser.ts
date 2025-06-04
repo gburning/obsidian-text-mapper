@@ -86,6 +86,12 @@ export class TextMapperParser {
 
     constructor(id: string, themes: Theme[] = []) {
         this.id = id;
+        themes.forEach((theme) => {
+            if (!/^[A-Za-z0-9_-]+$/.test(theme.id)) {
+                throw new Error(`Invalid theme ID: ${theme.id}`);
+            }
+        });
+        this.themes = themes;
         this.options = {
             orientation: "flat-top",
             "coordinates-format": "{X}{Y}",
@@ -126,6 +132,7 @@ export class TextMapperParser {
 
         const lines: string[] = [];
 
+        // TODO: Prefix relevant rules with theme id
         this.themes.forEach((theme) => lines.concat(theme.getDefinitions()));
 
         lines.concat(source.split("\n"));
