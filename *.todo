@@ -15,6 +15,10 @@ Rewrite:
   ☐ Easier way of positioning custom text elements
   ☐ Use react/preact
     See: DataView for example
+  ☐ Way of "tree-shaking" assets/definitions that are not used (i.e., don't add the definitions in the SVG document)
+  ☐ Option to apply border by default:
+    //      `<pattern id="hex-border" height="225" width="225"><image href="${border}" height="225" width="225" /></pattern>`,
+    //      `default attributes fill="url(#hex-border)" stroke="none"`,
   
 Publish:
   ☐ Ensure assets/code used can legally be included

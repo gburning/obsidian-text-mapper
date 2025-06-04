@@ -7,10 +7,6 @@ const { tiles, icons } = imageAssets as unknown as Record<
     Record<string, string>
 >;
 
-// TODO: "tree shake" images that don't wind up being used
-// TODO: Option to apply border by default:
-//      `<pattern id="hex-border" height="225" width="225"><image href="${border}" height="225" width="225" /></pattern>`,
-//      `default attributes fill="url(#hex-border)" stroke="none"`,
 // TODO: Document the widths/heights used (they seem to be required for some reason)
 export async function getDefinitions() {
     const res: string[] = [
