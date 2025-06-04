@@ -18,17 +18,13 @@ export const hpsCartography: Theme = {
             "option coordinates-format {x}.{y}",
             // Defaults
             `default attributes fill="none" stroke="none"`,
-            // Paths
-            `trail path attributes stroke="#e3bea3" stroke-width="6" fill="none"`,
-            `river path attributes transform="translate(20,10)" stroke="#6ebae7" stroke-width="8" fill="none" opacity="0.7"`,
-            `canyon path attributes transform="translate(20,10)" stroke="black" stroke-width="24" fill="none" opacity="0.2"`,
         ];
 
         Object.entries(icons).forEach(([key, value]) => {
             // Remove the file extension from the key
             const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
             res.push(
-                `<image id="${_key}" href="${getAssetUri(
+                `<image id="hps-c-${_key}" href="${getAssetUri(
                     value
                 )}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
             );
@@ -38,7 +34,7 @@ export const hpsCartography: Theme = {
             // Remove the file extension from the key
             const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
             res.push(
-                `<image id="${_key}" href="${getAssetUri(
+                `<image id="hps-c-${_key}" href="${getAssetUri(
                     value
                 )}" height="225" width="225" y="-112.5" x="-112.5" />`
             );

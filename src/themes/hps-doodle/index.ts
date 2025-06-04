@@ -1,16 +1,14 @@
 import type { Theme } from "src/lib/theme";
-import imageAssets from "./assets/**/*.png";
-import { getAssetUri } from "../../lib/util";
+import _imageAssets from "./assets/**/*.png";
+import { flattenAssets, getAssetUri } from "../../lib/util";
 
-const { tiles, icons } = imageAssets as unknown as Record<
-    string,
-    Record<string, string>
->;
+const imageAssets = flattenAssets(
+    _imageAssets as unknown as Record<string, string>
+);
 
-// TODO: Document the widths/heights used (they seem to be required for some reason)
 export const hpsDoodle: Theme = {
-    displayName: "HPS Doodle Tiles",
-    id: "hps-doodle",
+    displayName: "The Tiles of Xark!",
+    id: "hps-xark",
     getDefinitions() {
         const res: string[] = [
             // Options
@@ -19,25 +17,15 @@ export const hpsDoodle: Theme = {
             `default attributes fill="none" stroke="none"`,
         ];
 
-        // Object.entries(icons).forEach(([key, value]) => {
-        //     // Remove the file extension from the key
-        //     const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
-        //     res.push(
-        //         `<image id="${_key}" href="${getAssetUri(
-        //             value
-        //         )}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
-        //     );
-        // });
-
-        // Object.entries(tiles).forEach(([key, value]) => {
-        //     // Remove the file extension from the key
-        //     const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
-        //     res.push(
-        //         `<image id="${_key}" href="${getAssetUri(
-        //             value
-        //         )}" height="225" width="225" y="-112.5" x="-112.5" />`
-        //     );
-        // });
+        imageAssets.forEach((asset) => {
+            // Remove the file extension from the key
+            const _key = asset.name.replace(/\.(png|jpg|jpeg|svg)$/, "");
+            res.push(
+                `<image id="hps-d-${_key}" href="${getAssetUri(
+                    asset.content
+                )}" height="225" width="225" y="-112.5" x="-112.5" />`
+            );
+        });
 
         return res;
     },
