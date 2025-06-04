@@ -321,7 +321,7 @@ export class TextMapperParser {
             case "global":
             case "horizontal":
             case "swap-even-odd":
-                this.options[key] = true;
+                this.options[key] = value !== "false" && value !== "0";
                 break;
 
             // string options
