@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import { cp, rm, mkdir, writeFile } from "fs/promises";
+import { cp, rm, mkdir, writeFile, rename } from "fs/promises";
 import { resolve } from "path";
 import { homedir } from "os";
 import globImport from "esbuild-plugin-glob-import";
@@ -73,7 +73,19 @@ function toggleObsidianHotreload(outdir: string): esbuild.Plugin {
     };
 }
 
-// TODO: Check if the .css file must be "styles.css" and add plugin to rename it here in that case
+function renameCssFile(outdir: string): esbuild.Plugin {
+    return {
+        name: "rename-css-file",
+        setup(build) {
+            build.onEnd(async () => {
+                const oldPath = resolve(outdir, "main.css");
+                const newPath = resolve(outdir, "styles.css");
+                await rename(oldPath, newPath)
+            });
+        }
+    };
+}
+
 const options = {
     banner: {
         js: banner,
@@ -102,6 +114,7 @@ const options = {
         toggleObsidianHotreload(outdir),
         buildObsidianManifest(outdir),
         copyStaticFiles({ inputdir: "./static", outdir }),
+        renameCssFile(outdir),
         globImport({
             camelCase: false,
         }),
