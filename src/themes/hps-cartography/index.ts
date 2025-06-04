@@ -9,6 +9,8 @@ const { tiles, icons } = imageAssets as unknown as Record<
 
 // TODO: Document the widths/heights used (they seem to be required for some reason)
 export const hpsCartography: Theme = {
+    displayName: "HPS Cartography Tiles",
+    id: "hps-cartography",
     getDefinitions() {
         const res: string[] = [
             // Options
