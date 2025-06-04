@@ -4,7 +4,7 @@ import builtins from "builtin-modules";
 import { cp, rm, mkdir, writeFile, rename } from "fs/promises";
 import { resolve } from "path";
 import { homedir } from "os";
-import globImport from "esbuild-plugin-glob-import";
+import globImport from "./vendor/esbuild-plugin-import-glob/src/index.js"
 
 import manifestStub from "./manifest.stub.json" with { type: "json" };
 
@@ -114,10 +114,8 @@ const options = {
         buildObsidianManifest(outdir),
         copyStaticFiles({ inputdir: "./static", outdir }),
         renameCssFile(outdir),
-        globImport({
-            camelCase: false,
-        }),
-    ],
+        globImport.default(),
+    ]
 } satisfies esbuild.BuildOptions;
 
 try {

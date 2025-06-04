@@ -1,0 +1,3 @@
+[submodule "vendor/esbuild-plugin-import-glob"]
+	path = vendor/esbuild-plugin-import-glob
+	url = git@github.com:gburning/esbuild-plugin-import-glob.git

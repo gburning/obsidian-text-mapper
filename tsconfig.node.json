@@ -7,5 +7,9 @@
         "importHelpers": true,
         "resolveJsonModule": true
     },
-    "include": ["node.env.d.ts", "esbuild.ts"]
+    "include": [
+        "node.env.d.ts",
+        "esbuild.ts",
+        "vendor/esbuild-plugin-import-glob/**/*"
+    ]
 }
