@@ -47,6 +47,7 @@ function buildObsidianManifest(outdir: string): esbuild.Plugin {
             const filePath = resolve(outdir, "manifest.json");
 
             build.onEnd(async () => {
+                const manifest = { ...manifestStub };
                 // TODO: Use git tags to set base version and only append timestamp for development
                 manifest.version = [manifest.version, Date.now()].join(".");
                 return writeFile(filePath, JSON.stringify(manifest));
