@@ -19,18 +19,17 @@ import {
     SVG_ID_REGEX,
     SVG_HREF_REGEX,
     CSS_URL_FUNC_REGEX,
-} from "./constants.ts";
-import { Point, Orientation } from "./orientation.ts";
-import { Region } from "./region.ts";
-import { Spline } from "./spline.ts";
+} from "./constants";
+import { Point, Orientation } from "./orientation";
+import { Region } from "./region";
+import { Spline } from "./spline";
 
 interface TextMapperParserOptions {
     /**
-     * Set to true to use "pointy top" hexes rather than "flat top" hexes.
-     * @default false // (flat top hexes).
-     * @todo Rename option
+     * Whether to use "flat top" or "pointy top" hexes.
+     * @default "flat-top"
      */
-    horizontal: boolean;
+    orientation: "flat-top" | "pointy-top";
     /**
      * Format to use for coordinates text elements.
      * Supports the following replacement variables (replaced with actual coordinates):
@@ -86,7 +85,7 @@ export class TextMapperParser {
     constructor(id: string) {
         this.id = id;
         this.options = {
-            horizontal: false,
+            orientation: "flat-top",
             "coordinates-format": "{X}{Y}",
             "swap-even-odd": false,
             global: false,
@@ -134,17 +133,10 @@ export class TextMapperParser {
             }
         }
 
-        if (this.options.horizontal) {
-            this.orientation = new Orientation(
-                false,
-                this.options["swap-even-odd"]
-            );
-        } else {
-            this.orientation = new Orientation(
-                true,
-                this.options["swap-even-odd"]
-            );
-        }
+        this.orientation = new Orientation(
+            this.options.orientation === "flat-top",
+            this.options["swap-even-odd"]
+        );
 
         // Then,
         for (const line of lines) {
@@ -319,12 +311,17 @@ export class TextMapperParser {
         switch (key) {
             // boolean options
             case "global":
-            case "horizontal":
             case "swap-even-odd":
                 this.options[key] = value !== "false" && value !== "0";
                 break;
 
             // string options
+            case "orientation":
+                if (value === "flat-top" || value === "pointy-top") {
+                    this.options[key] = value;
+                }
+                break;
+
             case "coordinates-format":
             case "background":
                 this.options[key] = value;

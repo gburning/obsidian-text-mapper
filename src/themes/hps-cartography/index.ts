@@ -11,7 +11,7 @@ const { tiles, icons } = imageAssets as unknown as Record<
 export async function getDefinitions() {
     const res: string[] = [
         // Options
-        "option horizontal",
+        "option hex-type pointy-top",
         "option coordinates-format {x}.{y}",
         // Defaults
         `default attributes fill="none" stroke="none"`,
