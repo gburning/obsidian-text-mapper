@@ -1,11 +1,11 @@
-import type { Theme } from "src/lib/theme";
-import imageAssets from "./assets/**/*.png";
+import type { Theme } from "../../lib/theme";
 import { getAssetUri } from "../../lib/util";
 
-const { tiles, icons } = imageAssets as unknown as Record<
-    string,
-    Record<string, string>
->;
+import _icons from "./assets/icons/*.png";
+import _tiles from "./assets/tiles/*.png";
+
+const tiles = _tiles as unknown as { default: string }[];
+const icons = _icons as unknown as { default: string }[];
 
 // TODO: Document the widths/heights used (they seem to be required for some reason)
 export const hpsCartography: Theme = {

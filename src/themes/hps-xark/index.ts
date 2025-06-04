@@ -1,10 +1,8 @@
-import type { Theme } from "src/lib/theme";
-import _imageAssets from "src/themes/hps-xark/assets/**/*.png";
-import { flattenAssets, getAssetUri } from "../../lib/util";
+import type { Theme } from "../../lib/theme";
+import { getAssetUri } from "../../lib/util";
 
-const imageAssets = flattenAssets(
-    _imageAssets as unknown as Record<string, string>
-);
+import _imageAssets from "./assets/**/*.png";
+const imageAssets = _imageAssets as unknown as { default: string }[];
 
 export const hpsXark: Theme = {
     displayName: "The Tiles of Xark!",
