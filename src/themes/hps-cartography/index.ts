@@ -1,6 +1,4 @@
 import "./styles.css";
-import fontUglyQua from "./assets/UglyQua-webfont.woff";
-import fontUglyQuaItalic from "./assets/UglyQua-Italic-webfont.woff";
 import imageAssets from "./assets/**/*.png";
 
 const { tiles, icons } = imageAssets as unknown as Record<
@@ -8,7 +6,6 @@ const { tiles, icons } = imageAssets as unknown as Record<
     Record<string, string>
 >;
 
-// TODO: Move @font-face declarations to .css file when URL imports is fixed
 // TODO: "tree shake" images that don't wind up being used
 // TODO: Option to apply border by default:
 //      `<pattern id="hex-border" height="225" width="225"><image href="${border}" height="225" width="225" /></pattern>`,
@@ -22,9 +19,6 @@ export async function getDefinitions() {
         // Defaults
         `default attributes fill="none" stroke="none"`,
         `glow stroke="white" stroke-width="5pt" stroke-linejoin="round"`,
-        // Fonts
-        `<style>@font-face {font-family: "UglyQua"; src: url('${fontUglyQua}') format('woff');}</style>`,
-        `<style>@font-face {font-style: italic; font-family: "UglyQua"; src: url('${fontUglyQuaItalic}') format('woff');}</style>`,
         // Text styles
         `text font-size="16pt" dy="5px" font-family="UglyQua" font-style="normal"`,
         `label font-size="24pt" dy="15px" font-family="UglyQua" font-style="italic"`,
