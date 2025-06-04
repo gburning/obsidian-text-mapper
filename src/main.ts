@@ -10,10 +10,13 @@ import { TextMapperParser } from "./lib/parser";
 import "./assets/styles.css";
 
 import * as hpsCartography from "./themes/hps-cartography";
+import { providePluginContext } from "./lib/context";
 
 export default class TextMapperPlugin extends Plugin {
     async onload() {
         console.log("Loading Obsidian TextMapper.");
+        providePluginContext(this);
+
         super.registerMarkdownCodeBlockProcessor(
             "text-mapper",
             this.processMarkdown.bind(this)

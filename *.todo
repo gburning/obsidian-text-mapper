@@ -5,15 +5,14 @@ Rewrite:
     ☐ Splines?
       - Det är "implementationen" av en "path"
     ☐ Backgrounds vs Things?
-  ☐ Rename: tiles -> themes
+  ✔ Rename: tiles -> themes @done(25-06-04 13:31)
   ☐ Update documentation
     ☐ README
     ☐ Available rules (parameters/options/definitions)
-  ☐ Add way of setting themes/tile sets from Obsidian via txt file or similar
+  ☐ Add support for custom themes via txt file or Obsidian settings
   ☐ Update docs for coordinates-format
   ☐ Publish to Obsidian plugin store
   ☐ Option to define regions/zones that cover a set of coordinates
-  ☐ Add support for custom themes
   ☐ Easier way of positioning custom text elements
   ☐ Use react/preact
     See: DataView for example

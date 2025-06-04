@@ -1,5 +1,6 @@
 import "./styles.css";
 import imageAssets from "./assets/**/*.png";
+import { getAssetUri } from "../../lib/util";
 
 const { tiles, icons } = imageAssets as unknown as Record<
     string,
@@ -32,7 +33,9 @@ export async function getDefinitions() {
         // Remove the file extension from the key
         const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
         res.push(
-            `<image id="${_key}" href="${value}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
+            `<image id="${_key}" href="${getAssetUri(
+                value
+            )}" height="225" width="225" y="-112.5" x="-112.5" transform="scale(0.8)" />`
         );
     });
 
@@ -40,7 +43,9 @@ export async function getDefinitions() {
         // Remove the file extension from the key
         const _key = key.replace(/\.(png|jpg|jpeg|svg)$/, "");
         res.push(
-            `<image id="${_key}" href="${value}" height="225" width="225" y="-112.5" x="-112.5" />`
+            `<image id="${_key}" href="${getAssetUri(
+                value
+            )}" height="225" width="225" y="-112.5" x="-112.5" />`
         );
     });
 

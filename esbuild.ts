@@ -95,12 +95,11 @@ const options = {
     external: ["obsidian", "electron", ...builtins],
     format: "cjs",
     assetNames: "[dir]/[name]",
-    // TODO: Add support for resolving images, etc. as file urls with Obsidian syntax
     loader: {
-        ".jpeg": "dataurl",
-        ".jpg": "dataurl",
-        ".png": "dataurl",
-        ".svg": "dataurl",
+        ".jpeg": "file",
+        ".jpg": "file",
+        ".png": "file",
+        ".svg": "file",
         ".ttf": "dataurl",
         ".woff": "dataurl",
     },
